@@ -1,16 +1,16 @@
-import './../Nav.css';
+import navbar from './Navbar.module.css';
 
 const Navbar = () => {
     return (
-        <nav className="Nav">
+        <nav className={`${navbar.Navbar}`}>
             <a
-                className="App-link"
+                className={navbar.Link}
                 href="https://www.inp.nsk.su/binp"
             >
                 ИЯФ
             </a>
             <a
-                className="App-link"
+                className={navbar.Link}
                 href="https://www.inp.nsk.su/binp/novosti"
             >
                 Новости

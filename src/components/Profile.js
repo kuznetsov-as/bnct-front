@@ -1,6 +1,8 @@
+import profile from './Profile.module.css';
+
 const Profile = () => {
     return (
-        <div className="Content">
+        <div className={profile.Profile}>
             <div>
                 ava + description
             </div>
@@ -19,6 +21,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }
