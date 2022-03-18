@@ -1,0 +1,23 @@
+.Grid-wrapper {
+    display: grid;
+
+    grid-template-areas:
+        "header header"
+        "nav content";
+
+    grid-template-rows: 7vh 91vh;
+    grid-template-columns: 10% 90%;
+    grid-gap: 2px;
+}
+
+.Header {
+    grid-area: header;
+}
+
+.Nav {
+    grid-area: nav;
+}
+
+.Content {
+    grid-area: content;
+}

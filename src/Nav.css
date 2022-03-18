@@ -1,0 +1,10 @@
+.Nav {
+    background-color: #61dafb;
+    /*height: available;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
