@@ -1,0 +1,8 @@
+.Post {
+    background: yellow;
+}
+
+.Post img {
+    width: 50px;
+    border-radius: 50%;
+}

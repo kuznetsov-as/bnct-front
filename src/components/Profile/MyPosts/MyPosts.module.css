@@ -1,0 +1,14 @@
+.MyPosts {
+    background: aqua;
+}
+
+textarea {
+    resize: none;
+    width: 500px;
+    height: 10px;
+}
+
+button {
+    height: 20px;
+    background: white;
+}
