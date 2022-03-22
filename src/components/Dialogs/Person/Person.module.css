@@ -1,0 +1,13 @@
+.Person {
+    padding-left: 25px;
+    text-align: left;
+}
+
+.ActiveDialog {
+    color: white;
+}
+
+.Dialog {
+    color: white;
+    text-decoration: none;
+}

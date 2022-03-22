@@ -1,0 +1,18 @@
+.ProfileInfo {
+    display: grid;
+    grid-template-columns: 170px auto;
+    padding: 25px;
+}
+
+.ProfileInfo img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.ProfileInfo .Description {
+    text-align: center;
+    width: 150px;
+    height: auto;
+    padding: 25px;
+    border: 2px dashed #f69c55;
+}

@@ -8,7 +8,7 @@ import {Routes} from "react-router";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-const App = () => {
+const App = (props) => {
 
     return (
             <div className="Grid-wrapper">
@@ -19,8 +19,8 @@ const App = () => {
 
                 <div className="Grid-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile/>}/>
-                        <Route path='/dialogs' element={<Dialogs/>}/>
+                        <Route path='/profile' element={<Profile postData={props.postData}/>}/>
+                        <Route path='/dialogs/*' element={<Dialogs personsData={props.personsData} messagesData={props.messagesData}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>

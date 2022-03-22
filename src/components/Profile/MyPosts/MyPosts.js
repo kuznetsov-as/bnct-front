@@ -1,23 +1,23 @@
 import myPosts from './MyPosts.module.css';
 import Post from "./Post/Post";
 
- const MyPosts = () => {
+const MyPosts = (props) => {
+
+    let posts = props.postData.map(p => <Post message={p.message}/>)
 
     return (
-            <div className={myPosts.MyPosts}>
+        <div className={myPosts.MyPosts}>
+            <div>
                 <div>
-                    <div>
-                        <textarea />
-                        <button>Add post</button>
-                    </div>
-                    <div>
-                        <Post message='Hello!'/>
-                        <Post message='Hi, gays, how are you?'/>
-                        <Post message='I am fine!'/>
-                    </div>
+                    <textarea/>
+                    <button>Add post</button>
+                </div>
+                <div>
+                    {posts}
                 </div>
             </div>
-        )
+        </div>
+    )
 }
 
 export default MyPosts

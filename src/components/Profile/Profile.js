@@ -1,13 +1,12 @@
 import profile from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div className={profile.Profile}>
-            <div>
-                ava + description
-            </div>
-            <MyPosts/>
+            <ProfileInfo/>
+            <MyPosts postData = {props.postData}/>
         </div>
     )
 }
