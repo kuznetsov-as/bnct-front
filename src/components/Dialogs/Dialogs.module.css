@@ -1,4 +1,26 @@
 .Dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-areas:
+        "persons messages"
+        "persons send";
+    grid-template-rows: 20fr 5fr;
+    grid-template-columns: 200px 700px;
+}
+
+.Dialogs textarea {
+    width: 650px;
+}
+
+.GridPersons {
+    grid-area: persons;
+}
+
+
+.GridMessages {
+    grid-area: messages;
+}
+
+
+.GridSend {
+    grid-area: send;
 }

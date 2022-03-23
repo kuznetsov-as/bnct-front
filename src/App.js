@@ -19,8 +19,8 @@ const App = (props) => {
 
                 <div className="Grid-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile postData={props.state.postData}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs personsData={props.state.personsData} messagesData={props.state.messagesData}/>}/>
+                        <Route path='/profile' element={<Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+                        <Route path='/dialogs/*' element={<Dialogs state={props.state.dialogsPage}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>
