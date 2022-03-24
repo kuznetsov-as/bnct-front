@@ -19,7 +19,7 @@ const App = (props) => {
 
                 <div className="Grid-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+                        <Route path='/profile' element={<Profile state={props.state.profilePage} dispatch={props.dispatch}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs state={props.state.dialogsPage}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
