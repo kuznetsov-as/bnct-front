@@ -2,6 +2,7 @@ import dialogs from "./Dialogs.module.css";
 import Person from "./Person/Person";
 import Message from "./Message/Message";
 import React from "react";
+import {dialogChangeActionCreator, sendMessageActionCreator} from "../../Redux/DialogsReducer";
 
 const Dialogs = (props) => {
 
@@ -12,8 +13,13 @@ const Dialogs = (props) => {
     let messageText = React.createRef()
 
     let sendMessage = () => {
-        alert(messageText.current.value)
+        props.dispatch(sendMessageActionCreator())
     }
+
+    let onDialogChange = () => {
+        props.dispatch(dialogChangeActionCreator(messageText.current.value))
+    }
+
 
     return (
         <div className={dialogs.Dialogs}>
@@ -27,7 +33,7 @@ const Dialogs = (props) => {
             </div>
 
             <div className={dialogs.GridSend}>
-                <textarea ref={messageText}/>
+                <textarea onChange={onDialogChange} ref={messageText} value={props.state.newMessage}/>
                 <button onClick={sendMessage}>Send</button>
             </div>
 

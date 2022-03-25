@@ -1,5 +1,5 @@
-const ADD_POST = 'ADD_POST'
-const CHANGE_TEXT = 'CHANGE_TEXT'
+import profileReducer from "./ProfileReducer";
+import dialogsReducer from "./DialogsReducer";
 
 let store = {
     _state: {
@@ -28,7 +28,9 @@ let store = {
                 {id: 1, message: 'Hello!'},
                 {id: 2, message: 'Hi!'},
                 {id: 3, message: 'Привет!'}
-            ]
+            ],
+
+            newMessage: ''
         }
     },
 
@@ -37,7 +39,6 @@ let store = {
     },
 
     getState() {
-        debugger
         return this._state
     },
 
@@ -45,40 +46,11 @@ let store = {
         console.log('state is changed')
     },
 
-    _addPost() {
-        if (this._state.profilePage.newPostText) {
-
-            let newPost = {
-                id: this._state.profilePage.postsData.length + 1,
-                message: this._state.profilePage.newPostText
-            }
-
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._rerender(this._state)
-        }
-    },
-
-    _changeText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._rerender(this._state)
-    },
-
     dispatch(action) {
-      if (action.type === ADD_POST) {
-          this._addPost()
-      } else if (action.type === CHANGE_TEXT) {
-          this._changeText(action.newText)
-      }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._rerender(this._state)
     }
-}
-
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
-
-export const postChangeActionCreator = (newText) => {
-    return {type: CHANGE_TEXT, newText: newText}
 }
 
 export default store
