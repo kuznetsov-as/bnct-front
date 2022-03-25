@@ -2,22 +2,21 @@ import dialogs from "./Dialogs.module.css";
 import Person from "./Person/Person";
 import Message from "./Message/Message";
 import React from "react";
-import {dialogChangeActionCreator, sendMessageActionCreator} from "../../Redux/DialogsReducer";
 
 const Dialogs = (props) => {
 
-    let persons = props.state.personsData.map(p => <Person key={p.id} name={p.name} id={p.id}/>)
+    let persons = props.dialogsPage.personsData.map(p => <Person key={p.id} name={p.name} id={p.id}/>)
 
-    let messages = props.state.messagesData.map(m => <Message key={m.id} text={m.message}/>)
+    let messages = props.dialogsPage.messagesData.map(m => <Message key={m.id} text={m.message}/>)
 
     let messageText = React.createRef()
 
     let sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
 
     let onDialogChange = () => {
-        props.dispatch(dialogChangeActionCreator(messageText.current.value))
+        props.onDialogChange(messageText.current.value)
     }
 
 
@@ -33,7 +32,7 @@ const Dialogs = (props) => {
             </div>
 
             <div className={dialogs.GridSend}>
-                <textarea onChange={onDialogChange} ref={messageText} value={props.state.newMessage}/>
+                <textarea onChange={onDialogChange} ref={messageText} value={props.dialogsPage.newMessage}/>
                 <button onClick={sendMessage}>Send</button>
             </div>
 

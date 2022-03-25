@@ -1,10 +1,22 @@
 const ADD_POST = 'ADD_POST'
 const CHANGE_TEXT_POST = 'CHANGE_TEXT_POST'
 
-const profileReducer = (state, action) => {
+
+let initialState = {
+    postsData: [
+        {id: 1, message: 'Hello!'},
+        {id: 2, message: 'Hi, gays, how are you?'},
+        {id: 3, message: 'I am fine!'}
+    ],
+
+    newPostText: ''
+}
+
+const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
+            let stateCopy = {...state}
             if (state.newPostText) {
 
                 let newPost = {
@@ -12,13 +24,17 @@ const profileReducer = (state, action) => {
                     message: state.newPostText
                 }
 
-                state.postsData.push(newPost)
-                state.newPostText = ''
+                stateCopy.postsData = [...state.postsData]
+                stateCopy.postsData.push(newPost)
+                stateCopy.newPostText = ''
             }
-            return state
-        case CHANGE_TEXT_POST:
-            state.newPostText = action.newText
-            return state
+            return stateCopy
+        }
+        case CHANGE_TEXT_POST: {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
+            return stateCopy
+        }
         default:
             return state
     }
