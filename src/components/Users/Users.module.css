@@ -19,6 +19,18 @@
     border: white;
 }
 
+.Page {
+    font-size: xx-large;
+    padding: 5px;
+    /*font-weight: bold;*/
+}
+
+.PageSelected {
+    font-size: xx-large;
+    padding: 5px;
+    font-weight: bold;
+}
+
 /*.Followed {*/
 /*    height: 30px;*/
 /*    width: 100px;*/
