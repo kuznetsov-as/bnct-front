@@ -1,4 +1,4 @@
-import profileReducer from "./ProfileReducer";
+import profileReducer from "./UsersReducer";
 import dialogsReducer from "./DialogsReducer";
 
 let store = {

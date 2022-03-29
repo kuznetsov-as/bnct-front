@@ -7,27 +7,29 @@ import {Routes} from "react-router";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-const App = (props) => {
+const App = () => {
 
     return (
-            <div className="Grid-wrapper">
+        <div className="Grid-wrapper">
 
-                <Header/>
+            <Header/>
 
-                <Navbar/>
+            <Navbar/>
 
-                <div className="Grid-wrapper-content">
-                    <Routes>
-                        <Route path='/profile' element={<Profile/>}/>
-                        <Route path='/dialogs/*' element={<DialogsContainer/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                    </Routes>
-                </div>
-
+            <div className="Grid-wrapper-content">
+                <Routes>
+                    <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+                    <Route path='/users' element={<UsersContainer/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
+                </Routes>
             </div>
-    );
+
+        </div>
+    )
 }
 
 export default App;
