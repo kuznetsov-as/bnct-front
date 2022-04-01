@@ -2,17 +2,41 @@
     grid-area: header;
 
     background-color: #282c34;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
-    font-size: calc(10px + 2vmin);
+    /*display: compact;*/
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    /*justify-content: left;*/
+    color: white;
+}
+
+.LoginBlock {
+    float: right;
+    padding-right: 50px;
+    padding-top: 20px;
+    color: white;
+}
+
+.LoginBlock img {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.NameBlock {
+    float: left;
+    padding-right: 50px;
+    padding-top: 20px;
+    color: white;
+}
+
+.LoginBlock a{
     color: white;
 }
 
 .Logo {
     height: 5vmin;
     pointer-events: none;
+    float: left;
+    padding: 9px;
 }
 
 

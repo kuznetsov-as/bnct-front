@@ -2,6 +2,30 @@
 
 }
 
+.Logo {
+    height: 250px;
+    pointer-events: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@keyframes Logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .Logo {
+        animation: Logo-spin infinite 10s linear;
+    }
+}
+
 .Users img {
     width: 65px;
     border-radius: 50%;
