@@ -1,25 +1,15 @@
 import React from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {setProfileActionCreator} from "../../Redux/ProfileReducer";
+import {setProfileThunkCreator} from "../../Redux/ProfileReducer";
 import {useMatch} from "react-router";
-import {profileAPI} from "../../API/API";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-
-        let userId
-
-        if (!this.props.match) {
-            userId = 2
-        } else {
-            userId = this.props.match.params.userId
-        }
-
-        profileAPI.getProfile(userId).then(data => {
-            this.props.setProfile(data)
-        })
+        this.props.setProfileThunkCreator(this.props.match)
     }
 
     render() {
@@ -29,15 +19,14 @@ class ProfileContainer extends React.Component {
     }
 }
 
-
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
 })
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        setProfile: (profile) => {
-            dispatch(setProfileActionCreator(profile))
+        setProfileThunkCreator: (match) => {
+            dispatch(setProfileThunkCreator(match))
         }
     }
 }
@@ -49,7 +38,8 @@ export const withRouter = (Component) => {
     }
 }
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(WithUrlDataContainerComponent)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    WithAuthRedirect
+)(ProfileContainer)

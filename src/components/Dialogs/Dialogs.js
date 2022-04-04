@@ -19,7 +19,6 @@ const Dialogs = (props) => {
         props.onDialogChange(messageText.current.value)
     }
 
-
     return (
         <div className={dialogs.Dialogs}>
 

@@ -8,6 +8,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
 
@@ -20,12 +21,14 @@ const App = () => {
 
             <div className="Grid-wrapper-content">
                 <Routes>
-                    <Route path='/profile' element={<ProfileContainer/>}/>
-                    <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                    <Route path="profile" element={<ProfileContainer />}>
+                        <Route path=":userId" element={<ProfileContainer />} />
+                    </Route>
                     <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                     <Route path='/users' element={<UsersContainer/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
 

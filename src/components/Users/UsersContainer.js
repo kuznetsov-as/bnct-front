@@ -1,37 +1,24 @@
 import {connect} from "react-redux";
 import {
     followActionCreator,
-    setIsFetchingActionCreator, setIsFollowingProgressActionCreator,
-    setPageActionCreator,
-    setTotalUsersCountActionCreator,
-    setUsersActionCreator,
-    unfollowActionCreator
+    followThunkCreator,
+    getUsersThunkCreator,
+    setCurrentPageThunkCreator,
+    unfollowActionCreator,
+    unfollowThunkCreator
 } from "../../Redux/UsersReducer";
 import React from "react";
 import Users from "./Users";
 import Logo from "../common/Logo/Logo";
-import {usersAPI} from "../../API/API";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        if (this.props.users.length === 0) {
-            this.props.setIsFetching(true)
-
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setIsFetching(false)
-                this.setUsers(data.items)
-                this.setTotalUsersCount(data.totalCount)
-            })
-        }
+        this.props.getUsersThunkCreator(this.props.users, this.props.currentPage, this.props.pageSize)
     }
 
-    setUsers = (users) => {
-        this.props.setUsers(users)
-    }
-
-    setTotalUsersCount = (count) => {
-        this.props.setTotalUsersCount(count)
+    setPage = (page) => {
+        this.props.setCurrentPageThunkCreator(page, this.props.pageSize)
     }
 
     follow = (id) => {
@@ -42,18 +29,6 @@ class UsersContainer extends React.Component {
     unfollow = (id) => {
         this.props.unfollow(id)
     }
-
-    setPage = (page) => {
-        this.props.setPage(page)
-
-        this.props.setIsFetching(true)
-
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setIsFetching(false)
-                this.setUsers(data.items)
-            })
-    }
-
 
     render() {
 
@@ -70,8 +45,9 @@ class UsersContainer extends React.Component {
                         setPage={this.setPage}
                         unfollow={this.unfollow}
                         follow={this.follow}
-                        setIsFollowingProgress={this.props.setIsFollowingProgress}
                         followingInProgress={this.props.followingInProgress}
+                        followThunkCreator={this.props.followThunkCreator}
+                        unfollowThunkCreator={this.props.unfollowThunkCreator}
                     />
                 }
             </>
@@ -99,20 +75,17 @@ let mapDispatchToProps = (dispatch) => {
         unfollow: (id) => {
             dispatch(unfollowActionCreator(id))
         },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
+        getUsersThunkCreator: (users, currentPage, pageSize) => {
+            dispatch(getUsersThunkCreator(users, currentPage, pageSize))
         },
-        setPage: (page) => {
-            dispatch(setPageActionCreator(page))
+        setCurrentPageThunkCreator: (currentPage, pageSize) => {
+            dispatch(setCurrentPageThunkCreator(currentPage, pageSize))
         },
-        setTotalUsersCount: (count) => {
-            dispatch(setTotalUsersCountActionCreator(count))
+        followThunkCreator: (id) => {
+            dispatch(followThunkCreator(id))
         },
-        setIsFetching: (isFetching) => {
-            dispatch(setIsFetchingActionCreator(isFetching))
-        },
-        setIsFollowingProgress: (isFollowing) => {
-            dispatch(setIsFollowingProgressActionCreator(isFollowing))
+        unfollowThunkCreator: (id) => {
+            dispatch(unfollowThunkCreator(id))
         }
     }
 }

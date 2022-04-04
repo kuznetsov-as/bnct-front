@@ -1,3 +1,5 @@
+import {profileAPI} from "../API/API";
+
 const ADD_POST = 'ADD_POST'
 const CHANGE_TEXT_POST = 'CHANGE_TEXT_POST'
 const SET_PROFILE = 'SET_PROFILE'
@@ -57,6 +59,22 @@ export const postChangeActionCreator = (newText) => {
 
 export const setProfileActionCreator = (profile) => {
     return {type: SET_PROFILE, profile: profile}
+}
+
+export const setProfileThunkCreator = (match) => {
+
+    return (dispatch) => {
+        let userId
+        if (!match) {
+            userId = 2
+        } else {
+            userId = match.params.userId
+        }
+
+        profileAPI.getProfile(userId).then(data => {
+            dispatch(setProfileActionCreator(data))
+        })
+    }
 }
 
 export default profileReducer

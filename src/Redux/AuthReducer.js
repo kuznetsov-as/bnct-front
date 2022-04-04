@@ -1,3 +1,5 @@
+import {authAPI, profileAPI} from "../API/API";
+
 const SET_USER_DATA = 'SET_USER_DATA'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_PHOTO = 'SET_PHOTO'
@@ -48,9 +50,20 @@ export const setPhotoActionCreator = (photo) => {
     return {type: SET_PHOTO, photo: photo}
 }
 
-export const setIsFetchingActionCreator = (isFetching) => {
-    return {type: TOGGLE_IS_FETCHING, isFetching: isFetching}
-}
+export const setProfileInHeaderThunkCreator = () => {
 
+    return (dispatch) => {
+        authAPI.getMe().then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setAuthUserDataActionCreator(id, email, login))
+
+                profileAPI.getProfile().then(data => { //Передай в параметры this.props.id, когда загрузишь свою аву
+                    dispatch(setPhotoActionCreator(data.photos.large))
+                })
+            }
+        })
+    }
+}
 
 export default authReducer
