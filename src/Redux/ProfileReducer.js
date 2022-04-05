@@ -3,6 +3,7 @@ import {profileAPI} from "../API/API";
 const ADD_POST = 'ADD_POST'
 const CHANGE_TEXT_POST = 'CHANGE_TEXT_POST'
 const SET_PROFILE = 'SET_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 
 let initialState = {
@@ -14,7 +15,9 @@ let initialState = {
 
     newPostText: '',
 
-    profile: null
+    profile: null,
+
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -44,6 +47,12 @@ const profileReducer = (state = initialState, action) => {
                 profile: action.profile
             }
         }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state
     }
@@ -61,18 +70,35 @@ export const setProfileActionCreator = (profile) => {
     return {type: SET_PROFILE, profile: profile}
 }
 
-export const setProfileThunkCreator = (match) => {
+
+export const setStatusActionCreator = (status) => {
+    return {type: SET_STATUS, status: status}
+}
+
+export const setProfileThunkCreator = (id) => {
 
     return (dispatch) => {
-        let userId
-        if (!match) {
-            userId = 2
-        } else {
-            userId = match.params.userId
-        }
-
-        profileAPI.getProfile(userId).then(data => {
+        profileAPI.getProfile(id).then(data => {
             dispatch(setProfileActionCreator(data))
+        })
+    }
+}
+
+export const getStatusThunkCreator = (id) => {
+
+    return (dispatch) => {
+        profileAPI.getStatus(id).then(data => {
+            dispatch(setStatusActionCreator(data))
+        })
+    }
+}
+
+export const updateStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setStatusActionCreator(status))
+            }
         })
     }
 }

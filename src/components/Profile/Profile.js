@@ -13,7 +13,7 @@ const Profile = (props) => {
     } else {
         return (
             <div className={profile.Profile}>
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={props.profile} status={props.status} updateStatusThunkCreator={props.updateStatusThunkCreator}/>
                 <MyPostsContainer/>
             </div>
         )
