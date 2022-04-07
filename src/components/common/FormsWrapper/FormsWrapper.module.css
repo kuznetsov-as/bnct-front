@@ -1,0 +1,13 @@
+.FormsWrapper {
+
+}
+
+.FormsWrapper.Error input,
+.FormsWrapper.Error textarea
+{
+    border: 5px red solid;
+}
+
+.FormsWrapper.Error span {
+    color: red;
+}

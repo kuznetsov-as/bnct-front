@@ -21,7 +21,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
         case TOGGLE_IS_FETCHING: {
@@ -42,8 +41,8 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserDataActionCreator = (id, email, login) => {
-    return {type: SET_USER_DATA, data: {id, email, login}}
+export const setAuthUserDataActionCreator = (id, email, login, isAuth) => {
+    return {type: SET_USER_DATA, data: {id, email, login, isAuth}}
 }
 
 export const setPhotoActionCreator = (photo) => {
@@ -51,16 +50,40 @@ export const setPhotoActionCreator = (photo) => {
 }
 
 export const setProfileInHeaderThunkCreator = () => {
-
     return (dispatch) => {
         authAPI.getMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
-                dispatch(setAuthUserDataActionCreator(id, email, login))
+                dispatch(setAuthUserDataActionCreator(id, email, login, true))
 
                 profileAPI.getProfile().then(data => { //Передай в параметры this.props.id, когда загрузишь свою аву
                     dispatch(setPhotoActionCreator(data.photos.large))
                 })
+            }
+        })
+    }
+}
+
+export const loginThunkCreator = (login, password, rememberMe) => {
+
+    return (dispatch) => {
+
+        authAPI.login(login, password, rememberMe).then(data => {
+            console.log(data)
+            if (data.resultCode === 0) {
+                dispatch(setProfileInHeaderThunkCreator())
+            }
+        })
+    }
+}
+
+export const logoutThunkCreator = () => {
+
+    return (dispatch) => {
+
+        authAPI.logout().then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserDataActionCreator(null, null, null, false))
             }
         })
     }

@@ -13,8 +13,6 @@ let initialState = {
         {id: 3, message: 'I am fine!'}
     ],
 
-    newPostText: '',
-
     profile: null,
 
     status: ""
@@ -24,21 +22,11 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST: {
-            if (state.newPostText) {
-                return {
-                    ...state,
-                    postsData: [...state.postsData,
-                        {id: state.postsData.length + 1, message: state.newPostText}],
-                    newPostText: ''
-                }
-            } else {
-                return state
-            }
-        }
-        case CHANGE_TEXT_POST: {
+
             return {
                 ...state,
-                newPostText: action.newText
+                postsData: [...state.postsData,
+                    {id: state.postsData.length + 1, message: action.post}]
             }
         }
         case SET_PROFILE: {
@@ -58,12 +46,8 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
-
-export const postChangeActionCreator = (newText) => {
-    return {type: CHANGE_TEXT_POST, newText: newText}
+export const addPostActionCreator = (post) => {
+    return {type: ADD_POST, post: post}
 }
 
 export const setProfileActionCreator = (profile) => {

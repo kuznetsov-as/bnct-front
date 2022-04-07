@@ -1,7 +1,7 @@
 import Header from "./Header";
 import React from "react";
 import {connect} from "react-redux";
-import {setProfileInHeaderThunkCreator} from "../../Redux/AuthReducer";
+import {logoutThunkCreator, setProfileInHeaderThunkCreator} from "../../Redux/AuthReducer";
 
 class HeaderContainer extends React.Component{
 
@@ -28,6 +28,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         setProfileInHeaderThunkCreator: () => {
             dispatch(setProfileInHeaderThunkCreator())
+        },
+        logoutThunkCreator: () => {
+            dispatch(logoutThunkCreator())
         }
     }
 }

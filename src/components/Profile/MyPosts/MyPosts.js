@@ -1,28 +1,23 @@
 import myPosts from './MyPosts.module.css';
 import Post from "./Post/Post";
 import React from "react";
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators";
+import {Textarea} from "../../common/FormsWrapper/FormsWrapper";
 
 const MyPosts = (props) => {
 
+    const onSubmit = (formData) => {
+        props.addPost(formData.post)
+    }
+
     let posts = props.profilePage.postsData.map(p => <Post key={p.id} message={p.message}/>)
 
-    let newPostText = React.createRef()
-
-    let addPost = () => {
-        props.addPost()
-    }
-
-    let updateNewPostText = () => {
-        props.updateNewPostText(newPostText.current.value)
-    }
 
     return (
         <div className={myPosts.MyPosts}>
             <div>
-                <div>
-                    <textarea onChange={updateNewPostText} ref={newPostText} value={props.profilePage.newPostText}/>
-                    <button onClick={addPost}>Add post</button>
-                </div>
+                <PostReduxForm onSubmit={onSubmit}/>
                 <div>
                     {posts}
                 </div>
@@ -30,5 +25,25 @@ const MyPosts = (props) => {
         </div>
     )
 }
+
+let maxLength = maxLengthCreator(10)
+
+export const PostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field
+                name={"post"}
+                component={Textarea}
+                placeholder={"Напиши что-нибудь на своей стене"}
+                validate={[required, maxLength]}
+            />
+            <button>Add post</button>
+        </form>
+    )
+}
+const PostReduxForm = reduxForm({
+    form: 'post'
+})(PostForm)
+
 
 export default MyPosts

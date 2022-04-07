@@ -1,5 +1,4 @@
 const SEND_MESSAGE = 'SEND_MESSAGE'
-const CHANGE_TEXT_DIALOG = 'CHANGE_TEXT_DIALOG'
 
 let initialState = {
     personsData: [
@@ -17,29 +16,16 @@ let initialState = {
         {id: 2, message: 'Hi!'},
         {id: 3, message: 'Привет!'}
     ],
-
-    newMessage: ''
 }
 
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SEND_MESSAGE: {
-            if (state.newMessage) {
-                return {
-                    ...state,
-                    messagesData: [...state.messagesData,
-                        {id: state.messagesData.length + 1, message: state.newMessage}],
-                    newMessage: ''
-                }
-            } else {
-                return state
-            }
-        }
-        case CHANGE_TEXT_DIALOG: {
             return {
                 ...state,
-                newMessage: action.newText
+                messagesData: [...state.messagesData,
+                    {id: state.messagesData.length + 1, message: action.message}],
             }
         }
         default:
@@ -47,12 +33,8 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageActionCreator = () => {
-    return {type: SEND_MESSAGE}
-}
-
-export const dialogChangeActionCreator = (newText) => {
-    return {type: CHANGE_TEXT_DIALOG, newText: newText}
+export const sendMessageActionCreator = (message) => {
+    return {type: SEND_MESSAGE, message: message}
 }
 
 export default dialogsReducer

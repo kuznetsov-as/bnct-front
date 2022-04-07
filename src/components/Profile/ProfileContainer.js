@@ -39,7 +39,10 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatusThunkCreator={this.props.updateStatusThunkCreator}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatusThunkCreator={this.props.updateStatusThunkCreator}/> // Показать Лехе, что будет если закомментить
         )
     }
 }
@@ -73,5 +76,5 @@ export const withRouter = (Component) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withRouter,
-    // WithAuthRedirect
+    WithAuthRedirect
 )(ProfileContainer)

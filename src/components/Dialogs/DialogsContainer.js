@@ -12,11 +12,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator())
-        },
-        onDialogChange: (newText) => {
-            dispatch(dialogChangeActionCreator(newText))
+        sendMessage: (message) => {
+            dispatch(sendMessageActionCreator(message))
         }
     }
 }
