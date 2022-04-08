@@ -12,7 +12,7 @@ class ProfileContainer extends React.Component {
 
         let userId
         if (!this.props.match) {
-            userId = 23160
+            userId = this.props.id
         } else {
             userId = this.props.match.params.userId
         }
@@ -26,7 +26,7 @@ class ProfileContainer extends React.Component {
         if(prevProps.match !== this.props.match) {
             let userId
             if (!this.props.match) {
-                userId = 23160
+                userId = this.props.id
             } else {
                 userId = this.props.match.params.userId
             }
@@ -49,7 +49,8 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    id: state.auth.id
 })
 
 let mapDispatchToProps = (dispatch) => {

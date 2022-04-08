@@ -10,6 +10,7 @@ import {
 import React from "react";
 import Users from "./Users";
 import Logo from "../common/Logo/Logo";
+import {getUsersSelector} from "../../selectors/UsersSelectors";
 
 class UsersContainer extends React.Component {
 
@@ -57,7 +58,7 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
+        users: getUsersSelector(state),
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,

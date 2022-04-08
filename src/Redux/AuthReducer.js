@@ -1,4 +1,5 @@
 import {authAPI, profileAPI} from "../API/API";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
@@ -51,12 +52,12 @@ export const setPhotoActionCreator = (photo) => {
 
 export const setProfileInHeaderThunkCreator = () => {
     return (dispatch) => {
-        authAPI.getMe().then(data => {
+        return  authAPI.getMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setAuthUserDataActionCreator(id, email, login, true))
 
-                profileAPI.getProfile().then(data => { //Передай в параметры this.props.id, когда загрузишь свою аву
+                profileAPI.getProfile().then(data => {
                     dispatch(setPhotoActionCreator(data.photos.large))
                 })
             }
@@ -72,6 +73,9 @@ export const loginThunkCreator = (login, password, rememberMe) => {
             console.log(data)
             if (data.resultCode === 0) {
                 dispatch(setProfileInHeaderThunkCreator())
+            } else {
+                let action = stopSubmit("login", {_error: data.messages})
+                dispatch(action)
             }
         })
     }

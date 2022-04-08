@@ -9,31 +9,66 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import React from "react";
+import {connect} from "react-redux";
+import MyPosts from "./components/Profile/MyPosts/MyPosts";
+import {addPostActionCreator} from "./Redux/ProfileReducer";
+import {setProfileInHeaderThunkCreator} from "./Redux/AuthReducer";
+import {initialAppThunkCreator} from "./Redux/AppReducer";
+import Logo from "./components/common/Logo/Logo";
 
-const App = () => {
 
-    return (
-        <div className="Grid-wrapper">
 
-            <HeaderContainer/>
+class App extends React.Component {
 
-            <Navbar/>
+    componentDidMount() {
+        this.props.initialAppThunkCreator()
+    }
 
-            <div className="Grid-wrapper-content">
-                <Routes>
-                    <Route path="profile" element={<ProfileContainer />}>
-                        <Route path=":userId" element={<ProfileContainer />} />
-                    </Route>
-                    <Route path='/dialogs/*' element={<DialogsContainer/>}/>
-                    <Route path='/users' element={<UsersContainer/>}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                </Routes>
-            </div>
+    render() {
 
-        </div>
-    )
+        if (this.props.initialized) {
+
+            return (
+                <div className="Grid-wrapper">
+
+                    <HeaderContainer/>
+
+                    <Navbar/>
+
+                    <div className="Grid-wrapper-content">
+                        <Routes>
+                            <Route path="profile" element={<ProfileContainer/>}>
+                                <Route path=":userId" element={<ProfileContainer/>}/>
+                            </Route>
+                            <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+                            <Route path='/users' element={<UsersContainer/>}/>
+                            <Route path='/news' element={<News/>}/>
+                            <Route path='/settings' element={<Settings/>}/>
+                            <Route path='/login' element={<Login/>}/>
+                        </Routes>
+                    </div>
+
+                </div>
+            )
+        } else {
+            return (
+                <Logo/>
+            )
+        }
+    }
 }
 
-export default App;
+let mapStateToProps = (state) => ({
+        initialized: state.app.initialized
+})
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        initialAppThunkCreator: () => {
+            dispatch(initialAppThunkCreator())
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -11,3 +11,7 @@
 .FormsWrapper.Error span {
     color: red;
 }
+
+.SummaryError {
+    color: red;
+}

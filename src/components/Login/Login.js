@@ -6,6 +6,7 @@ import {addPostActionCreator, setProfileThunkCreator} from "../../Redux/ProfileR
 import {loginThunkCreator, logoutThunkCreator} from "../../Redux/AuthReducer";
 import {Navigate} from "react-router-dom";
 import React from "react";
+import styles from "../common/FormsWrapper/FormsWrapper.module.css";
 
 const Login = (props) => {
 
@@ -53,6 +54,10 @@ const LoginForm = (props) => {
                     name={"rememberMe"}
                     component={Input}
                 />Запомнить меня
+            </div>
+
+            <div className={styles.SummaryError}>
+                {props.error}
             </div>
 
             <div>

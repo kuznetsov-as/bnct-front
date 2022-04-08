@@ -11,7 +11,7 @@ const MyPosts = (props) => {
         props.addPost(formData.post)
     }
 
-    let posts = props.profilePage.postsData.map(p => <Post key={p.id} message={p.message}/>)
+    let posts = props.profilePage.postsData.map(p => <Post photo={props.photo} key={p.id} message={p.message}/>)
 
 
     return (
